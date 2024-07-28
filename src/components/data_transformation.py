@@ -25,7 +25,13 @@ class DataTransformation:
         try:
             numerical_columns=["writing_score","reading_score"]
             categorical_columns =["gender","race_ethnicity","parental_level_of_education","lunch","test_preparation_course"]
+            """ 
+            def get_data_transofrmer_object(self,train_df):
             
+            numerical_columns = train_df.select_dtypes(exclude="O").columns.tolist()
+            categorical_columns = train_df.select_dtypes(include="O).columns.tolist()
+            
+            """
             num_pipeline=Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="median")),
@@ -50,6 +56,7 @@ class DataTransformation:
                     ("cat_pipline",cat_pipeline,categorical_columns)
                 ]
             )
+            
             
             return preprocessor
         
@@ -85,11 +92,7 @@ class DataTransformation:
             train_arr = np.c_[
                 input_feature_train_arr, np.array(target_feature_train_df)
             ]
-            test_arr = np.c_
-            [   
-                input_feature_test_arr, np.array(target_feature_test_df)           
-            ]
-
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
             
             logging.info(f"Saved project object")
             
